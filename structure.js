@@ -41,4 +41,5 @@ function createSubject(time, subject, teacher) {
   });
   
   console.log(schedule);
-  
+  console.log(schedule[0].division_A);
+  console.log(schedule[0].division_A[0].subjects);
