@@ -1,3 +1,5 @@
+Remember : Small details make your future brighter
+
 main file is time-table.js
 
 but if you want to see small details about working or any topic you can see : 
