@@ -125,4 +125,57 @@ console.log("total weekdays",weekdays);
 const total_days_for_study = totalDays - (weekends+holidays.length+total_diwali_Days+total_summer_vacation_days+exam_sem_1_total_days+exam_Sem_2_total_days);
 console.log("total days for study",total_days_for_study);
 
-//loop on total_days_for_study to make 
+//loop on total_days_for_study to make schedule
+//sample schedule that generate is like below : 
+
+// const schedule = [{
+//     divion_A : [{
+//         date : 2024/6/1,
+//         day : monday,
+//         subjects : [
+//             {
+//                 time : "7:00 to 8:00 AM",
+//                 subject : "Maths",
+//                 teacher : "Mr.pole" 
+//             }
+//         ]
+//     }],
+//     division_B : [{
+//         date : 2024/6/1,
+//         day : monday,
+//         subjects : [
+//             {
+//                 time : "7:00 to 8:00 AM",
+//                 subject : "English",
+//                 teacher : "Mrs.shah" 
+//             }
+//         ]
+//     }],
+//     division_C : [{
+//         date : 2024/6/1,
+//         day : monday,
+//         subjects : [
+//             {
+//                 time : "7:00 to 8:00 AM",
+//                 subject : "Science",
+//                 teacher : "Mrs.Acharya" 
+//             }
+//         ]
+//     }],
+//     division_D : [{
+//         date : 2024/6/1,
+//         day : monday,
+//         subjects : [
+//             {
+//                 time : "7:00 to 8:00 AM",
+//                 subject : "Computer Basics",
+//                 teacher : "Mr.sarabhai" 
+//             }
+//         ]
+//     }]
+// }];
+
+let time_table_Schedule = [];
+for(let i = 0; i <total_days_for_study.length; i++){
+
+}
