@@ -1,4 +1,4 @@
-const {eachDayOfInterval} = require("date-fns");
+const {eachDayOfInterval, getDay} = require("date-fns");
 
 const standard = 6;
 const division = 4;
@@ -28,57 +28,67 @@ const subjects = [
     teacher : "Mr.sarabhai"
 }
 ];
-const term_startdate = new Date(2024,5,1);
-const term_enddate = new Date(2025,3,15);
+const term_startdate = new Date(2024,6,1);
+const term_enddate = new Date(2025,4,15);
 const holidays = [
     {
-        date : "2024-08-15",
+        date : new Date(2024,8,15),
         day : "Independence day"
     },
     {
-        date : "2024-08-19",
+        date : new Date(2024,8,19),
         day : "Rakhi"
     },
     {
-        date : "2024-08-26",
+        date : new Date(2024,8,26),
         day : "Janmashtmi"
     },
     {
-        date : "2024-10-02", 
+        date : new Date(2024,10,2), 
         day : "Gandhi Jayanti"
     },
     {
-        date : "2024-10-11", 
+        date : new Date(2024,10,11), 
         day : "Dushera"
     },
     {
-        date : "2024-11-01",
+        date : new Date(2024,11,1),
         day : "Diwali"
     },
     {
-        date : "2025-01-15",
+        date : new Date(2025,1,15),
         day : "Uttrayan"
     },
     {
-        date : "2025-01-26",
+        date : new Date(2025,1,26),
         day : "Republic Day"
     },
     {
-        date : "2025-03-25",
+        date : new Date(2025,3,25),
         day : "Holi"
     }
 ];
 //work for future when we are working on weekdays , weekends and holidays scenario of exams schedule
-// const diwaliHolidays = 12;
-// const diwali_holiday_starting_date = "2024-10-31";
-// const diwali_holiday_ending_date = "2024-12-01";
-// const summer_vacation_Days = 20;
-// const summer_vacation_start_date = "2025-04-15";
-// const summer_vacation_end_date = "2025-06-01";
-// const exam_sem_1_start_date = "2024-10-26";
-// const exam_Sem_1_end_date = "2024-10-31";
-// const exam_sem_2_start_date = "2025-04-09";
-// const exam_Sem_2_end_date = "2025-04-15";
+const diwali_holiday_starting_date = new Date(2024,11,1);
+const diwali_holiday_ending_date = new Date(2024,11,21);
+const summer_vacation_start_date = new Date(2025,4,16);
+const summer_vacation_end_date = new Date(2025,5,31);
+const exam_sem_1_start_date = new Date(2024,10,26);
+const exam_Sem_1_end_date = new Date(2024,10,31);
+const exam_sem_2_start_date = new Date(2025,4,9);
+const exam_Sem_2_end_date = new Date(2025,4,15);
+
+const total_diwali_vacation = eachDayOfInterval({start:diwali_holiday_starting_date,end:diwali_holiday_ending_date});
+const total_diwali_Days = total_diwali_vacation.length;
+
+const total_summer_vacation = eachDayOfInterval({start:summer_vacation_start_date,end:summer_vacation_end_date});
+const total_summer_vacation_days = total_summer_vacation.length;
+
+const exam_sem_1_days = eachDayOfInterval({start:exam_sem_1_start_date,end:exam_Sem_1_end_date});
+const exam_sem_1_total_days = exam_sem_1_days.length;
+
+const exam_Sem_2_days = eachDayOfInterval({start:exam_sem_2_start_date,end:exam_Sem_2_end_date});
+const exam_Sem_2_total_days = exam_Sem_2_days.length;
 
 //step-1 : I have 6 subjects and 6 days per week so I just count start_date and end_date of term and calculate days then
 //I count weekdays and weekends and holidays.
@@ -88,6 +98,31 @@ const holidays = [
 //for whole week and in divison B no first lecture should be maths it sholud be another subject excepts maths.
 
 const count_days_to_term = eachDayOfInterval({start:term_startdate,end:term_enddate});
-console.log(count_days_to_term.length);
+
+const totalDays = count_days_to_term.length;
+console.log("total term days",totalDays);
+console.log("total diwali vacation days",total_diwali_Days);
+console.log("total summer vacation days",total_summer_vacation_days);
+console.log("Exam sem 1 total days",exam_sem_1_total_days);
+console.log("exam sem 2 total days",exam_Sem_2_total_days);
 
 //find weekends and weekdays from count_days_to_term
+let weekends = 0;
+let weekdays = 0;
+count_days_to_term.forEach(date => {
+    const dayOfWeek = getDay(date);
+    if(dayOfWeek === 0){
+        weekends++;
+    }else{
+        weekdays++;
+    }
+});
+
+console.log("total weekends",weekends);
+console.log("total weekdays",weekdays);
+
+//calculate days for which I have to make schedule for students which is totaldays - (weekends+holidays+diwalivacationdays+summervacationdays)
+const total_days_for_study = totalDays - (weekends+holidays.length+total_diwali_Days+total_summer_vacation_days+exam_sem_1_total_days+exam_Sem_2_total_days);
+console.log("total days for study",total_days_for_study);
+
+//loop on total_days_for_study to make 
