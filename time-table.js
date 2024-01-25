@@ -175,7 +175,14 @@ console.log("total days for study",total_days_for_study);
 //     }]
 // }];
 
+//set intital start_time and end_time
+const start_time = new Date();
+start_time.setHours(7,0,0,0);
+
+const end_time = new Date();
+end_time.setHours(13,30,0,0);
+
 let time_table_Schedule = [];
 for(let i = 0; i <total_days_for_study.length; i++){
-
+    
 }
