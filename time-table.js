@@ -2,6 +2,7 @@ const {eachDayOfInterval, getDay} = require("date-fns");
 
 const standard = 6;
 const division = 4;
+const divisons = ['division_A','division_B','division_C','division_D'];
 const subjects = [
 {
     subject : "Maths",
@@ -183,6 +184,12 @@ const end_time = new Date();
 end_time.setHours(13,30,0,0);
 
 let time_table_Schedule = [];
+
+divisons.forEach((divion) => {
+    const divisonSchedule = [];
+
+});
+
 for(let i = 0; i <total_days_for_study.length; i++){
-    
+
 }
