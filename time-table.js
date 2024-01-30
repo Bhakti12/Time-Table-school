@@ -1,4 +1,6 @@
 const {eachDayOfInterval, getDay} = require("date-fns");
+// const {calculateTime} = require("example.js"); 
+// const {createSubject} = require("structure.js");
 
 const standard = 6;
 const division = 4;
@@ -122,7 +124,6 @@ count_days_to_term.forEach(date => {
 console.log("total weekends",weekends);
 console.log("total weekdays",weekdays);
 
-//calculate days for which I have to make schedule for students which is totaldays - (weekends+holidays+diwalivacationdays+summervacationdays)
 const total_days_for_study = totalDays - (weekends+holidays.length+total_diwali_Days+total_summer_vacation_days+exam_sem_1_total_days+exam_Sem_2_total_days);
 console.log("total days for study",total_days_for_study);
 
@@ -177,19 +178,3 @@ console.log("total days for study",total_days_for_study);
 // }];
 
 //set intital start_time and end_time
-const start_time = new Date();
-start_time.setHours(7,0,0,0);
-
-const end_time = new Date();
-end_time.setHours(13,30,0,0);
-
-let time_table_Schedule = [];
-
-divisons.forEach((divion) => {
-    const divisonSchedule = [];
-
-});
-
-for(let i = 0; i <total_days_for_study.length; i++){
-
-}
