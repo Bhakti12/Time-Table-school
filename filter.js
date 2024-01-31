@@ -1,96 +1,26 @@
-const {eachDayOfInterval, getDay} = require("date-fns");
+const A = [12, 2, 3, 4, 5, 6, 7, 8, 9];
 
-// ... (your existing code)
-const term_startdate = new Date(2024,6,1);
-const term_enddate = new Date(2025,4,15);
-const holidays = [
-    {
-        date : new Date(2024,8,15),
-        day : "Independence day"
-    },
-    {
-        date : new Date(2024,8,19),
-        day : "Rakhi"
-    },
-    {
-        date : new Date(2024,8,26),
-        day : "Janmashtmi"
-    },
-    {
-        date : new Date(2024,10,2), 
-        day : "Gandhi Jayanti"
-    },
-    {
-        date : new Date(2024,10,11), 
-        day : "Dushera"
-    },
-    {
-        date : new Date(2024,11,1),
-        day : "Diwali"
-    },
-    {
-        date : new Date(2025,1,15),
-        day : "Uttrayan"
-    },
-    {
-        date : new Date(2025,1,26),
-        day : "Republic Day"
-    },
-    {
-        date : new Date(2025,3,25),
-        day : "Holi"
-    }
-];
-//work for future when we are working on weekdays , weekends and holidays scenario of exams schedule
-const diwali_holiday_starting_date = new Date(2024,11,1);
-const diwali_holiday_ending_date = new Date(2024,11,21);
-const summer_vacation_start_date = new Date(2025,4,16);
-const summer_vacation_end_date = new Date(2025,5,31);
-const exam_sem_1_start_date = new Date(2024,10,26);
-const exam_Sem_1_end_date = new Date(2024,10,31);
-const exam_sem_2_start_date = new Date(2025,4,9);
-const exam_Sem_2_end_date = new Date(2025,4,15);
+// Create an array with elements from 1 to 20
+const allNumbers = Array.from({ length: 20 }, (_, index) => index + 1);
 
-const isWithinInterval = (date, start, end) => date >= start && date <= end;
+// Filter out elements from array A
+const resultArray = allNumbers.filter(number => !A.includes(number));
 
-const total_diwali_vacation = eachDayOfInterval({start:diwali_holiday_starting_date,end:diwali_holiday_ending_date});
-const total_diwali_Days = total_diwali_vacation.filter(date => isWithinInterval(date, term_startdate, term_enddate)).length;
+console.log(resultArray);
 
-const total_summer_vacation = eachDayOfInterval({start:summer_vacation_start_date,end:summer_vacation_end_date});
-const total_summer_vacation_days = total_summer_vacation.filter(date => isWithinInterval(date, term_startdate, term_enddate)).length;
+var isoDateString = "2024-06-30T18:30:00.000Z";
+var myDate = new Date(isoDateString);
 
-const exam_sem_1_days = eachDayOfInterval({start:exam_sem_1_start_date,end:exam_Sem_1_end_date});
-const exam_sem_1_total_days = exam_sem_1_days.filter(date => isWithinInterval(date, term_startdate, term_enddate)).length;
+// Get day, month, and year
+var day = myDate.getUTCDate();
+var month = myDate.getUTCMonth() + 1; // Adding 1 because months are zero-based
+var year = myDate.getUTCFullYear();
 
-const exam_Sem_2_days = eachDayOfInterval({start:exam_sem_2_start_date,end:exam_Sem_2_end_date});
-const exam_Sem_2_total_days = exam_Sem_2_days.filter(date => isWithinInterval(date, term_startdate, term_enddate)).length;
+// Format day and month with leading zeros if needed
+var formattedDay = (day < 10) ? "0" + day : day;
+var formattedMonth = (month < 10) ? "0" + month : month;
 
-// Create an array of all dates between term_startdate and term_enddate
-const allDates = eachDayOfInterval({ start: term_startdate, end: term_enddate });
-console.log("allDates",allDates.length);
+// Create the formatted date string
+var formattedDateString = formattedDay + "-" + formattedMonth + "-" + year;
 
-// Function to check if a date is a holiday
-const isHoliday = (date) => holidays.some(holiday => holiday.date.getTime() === date.getTime());
-
-// Function to check if a date is within the specified interval
-
-// Function to filter out holidays, vacations, and exam dates
-const filterDates = (dates, excludedDates) => dates.filter(date => !excludedDates.some(excludedDate => excludedDate.getTime() === date.getTime()));
-
-// Exclude holidays, summer vacation, Diwali vacation, exam sem1, and exam sem2 dates
-const excludedDates = [
-    ...holidays.map(holiday => holiday.date),
-    ...total_diwali_vacation,
-    ...total_summer_vacation,
-    ...exam_sem_1_days,
-    ...exam_Sem_2_days
-];
-
-console.log(excludedDates);
-
-// Get the array of dates excluding the specified dates
-const filteredDates = filterDates(allDates, excludedDates);
-
-// Display the result
-console.log(filteredDates);
-console.log(filteredDates.length);
+console.log(formattedDateString);
