@@ -3,9 +3,23 @@ const nodemon = require("nodemon");
 // const {calculateTime} = require("example.js"); 
 // const {createSubject} = require("structure.js");
 
-const standard = 6;
-const division = 4;
-const divisons = ['division_A','division_B','division_C','division_D'];
+const divisons = [{
+    standard : 6,
+    division : "division_A" 
+},
+{
+    standard : 6,
+    division : "division_B"
+},
+{
+    standard : 6,
+    division : "division_C"
+},
+{
+    standard : 6,
+    division : "division_D"
+}];
+
 const subjects = [
 {
     subject : "Maths",
@@ -32,6 +46,7 @@ const subjects = [
     teacher : "Mr.sarabhai"
 }
 ];
+
 const term_startdate = new Date(2024,6,1);
 const term_enddate = new Date(2025,4,15);
 const holidays = [
@@ -72,6 +87,16 @@ const holidays = [
         day : "Holi"
     }
 ];
+//set time
+let schoolStartTime = new Date();
+schoolStartTime.setHours(7, 0, 0, 0);
+
+let schoolEndTime = new Date();
+schoolEndTime.setHours(13, 30, 0, 0);
+
+const lectureDuration = 1;
+let numberOfLectures = 6;
+
 //work for future when we are working on weekdays , weekends and holidays scenario of exams schedule
 const diwali_holiday_starting_date = new Date(2024,11,1);
 const diwali_holiday_ending_date = new Date(2024,11,21);
@@ -135,13 +160,12 @@ count_days_to_term.forEach(date => {
 console.log("holidays",holidays.length);
 // console.log(weekends);
 
-weekends = weekends.filter(date => !total_diwali_vacation.includes(date) && !total_summer_vacation.includes(date) && !exam_sem_1_days.includes(date) && !exam_Sem_2_days.includes(date) && !holidays.includes(date));
+weekends = weekends.filter(date => !total_diwali_vacation.includes(date) && !exam_sem_1_days.includes(date) && !exam_Sem_2_days.includes(date) && !holidays.includes(date));
 console.log("weekends",weekends.length);
 
 const excludedDates = [
     ...weekends.map(date => ({ date, type: "weekend" })),
     ...total_diwali_vacation.map(date => ({ date, type: "diwali" })),
-    ...total_summer_vacation.map(date => ({ date, type: "summer" })),
     ...exam_sem_1_days.map(date => ({ date, type: "exam_sem_1" })),
     ...exam_Sem_2_days.map(date => ({ date, type: "exam_Sem_2" })),
     ...holidays.map(holiday => ({ date: holiday.date, type: "holiday" }))
@@ -151,7 +175,6 @@ console.log("exculdedDates",excludedDates.length);
 
 const total_days_for_study = totalDays - (excludedDates.length);
 console.log("total days for study",total_days_for_study);
-console.log("totaldays",totalDays,"count",count_days_to_term.length);
 
 const studyDates = count_days_to_term.filter(date => {
     const isExcluded = excludedDates.some(excludedDate => {
@@ -219,3 +242,11 @@ console.log("Study Dates:", studyDates);
 // }];
 
 //set intital start_time and end_time
+let subjectss = [];
+let division_data = {};
+let subject_data = {};
+for(let d of divisons){
+    division_data.date = term_startdate;
+    division_data.day = "Monday";
+        
+}
