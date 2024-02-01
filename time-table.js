@@ -1,4 +1,5 @@
 const {eachDayOfInterval, getDay} = require("date-fns");
+const nodemon = require("nodemon");
 // const {calculateTime} = require("example.js"); 
 // const {createSubject} = require("structure.js");
 
@@ -129,29 +130,41 @@ count_days_to_term.forEach(date => {
     }
 });
 
-console.log("total weekends",weekends.length);
+// console.log("total weekends",weekends.length);
 // console.log("total weekdays",weekdays.length);
 console.log("holidays",holidays.length);
-console.log(weekends);
+// console.log(weekends);
+
+weekends = weekends.filter(date => !total_diwali_vacation.includes(date) && !total_summer_vacation.includes(date) && !exam_sem_1_days.includes(date) && !exam_Sem_2_days.includes(date) && !holidays.includes(date));
+console.log("weekends",weekends.length);
 
 const excludedDates = [
-    ...weekends,
-    ...total_diwali_vacation,
-    ...total_summer_vacation,
-    ...exam_sem_1_days,
-    ...exam_Sem_2_days,
-    ...holidays.map(holiday => holiday.date)
+    ...weekends.map(date => ({ date, type: "weekend" })),
+    ...total_diwali_vacation.map(date => ({ date, type: "diwali" })),
+    ...total_summer_vacation.map(date => ({ date, type: "summer" })),
+    ...exam_sem_1_days.map(date => ({ date, type: "exam_sem_1" })),
+    ...exam_Sem_2_days.map(date => ({ date, type: "exam_Sem_2" })),
+    ...holidays.map(holiday => ({ date: holiday.date, type: "holiday" }))
 ];
+
+console.log("exculdedDates",excludedDates.length);
 
 const total_days_for_study = totalDays - (excludedDates.length);
 console.log("total days for study",total_days_for_study);
 console.log("totaldays",totalDays,"count",count_days_to_term.length);
 
-console.log("exculdedDates",excludedDates.length);
+const studyDates = count_days_to_term.filter(date => {
+    const isExcluded = excludedDates.some(excludedDate => {
+        // console.log("sdfsdf",excludedDate);
+        if (excludedDate.date.getTime() === date.getTime()) {
+            // console.log("Excluded Date:", date, "Type:", excludedDate.type);
+            return true;
+        }
+        return false;
+    });
 
-const studyDates = count_days_to_term.filter(date => 
-    !excludedDates.includes(date)
-);
+    return !isExcluded;
+});
 
 console.log("Dates for study:", studyDates.length);
 console.log("Study Dates:", studyDates);
